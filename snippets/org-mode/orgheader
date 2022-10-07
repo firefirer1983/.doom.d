@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: header
+# key: <orgh
+# condition: t
+# --
+#+title: $1
+#+STARTUP: inlineimages
+#+OPTIONS: num:nil ^:nil \n:t
+
+$0

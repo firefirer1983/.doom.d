@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: pile
+# key: <pile
+# --
+#+TBLNAME:${1:tablename}
+| $2 | $3 |
+|   $4 | $5 |
+
+#+name:
+#+begin_src R :results file graphics :file $1.png :var $1=$1
+pie($1[,1], labels = $1[,2])
+#+end_src
