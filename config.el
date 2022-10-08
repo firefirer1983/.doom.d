@@ -28,10 +28,22 @@
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
 ;; refresh your font settings. If Emacs still can't find your font, it likely
 ;; wasn't installed correctly. Font issues are rarely Doom issues!
-(setq doom-font (font-spec :family "JetBrains Mono NL" :size 13)
-      doom-unicode-font (font-spec :family "Microsoft YaHei UI Light" :size 13)
-      ;; doom-variable-pitch-font (font-spec :family "Microsoft YaHei UI Light" :size 13)
-      )
+;; (setq doom-font (font-spec :family "JetBrains Mono NL" :size 13)
+;;       doom-unicode-font (font-spec :family "Microsoft YaHei UI Light" :size 13)
+;;       ;; doom-variable-pitch-font (font-spec :family "Microsoft YaHei UI Light" :size 13)
+;;       )
+(setq doom-font (font-spec :family "JetBrains Mono NL" :size 15 :weight 'normal :width 'normal)
+      doom-variable-pitch-font (font-spec :family "JetBrains Mono NL" :size 15 :weight 'normal :width 'normal)
+      doom-big-font (font-spec :family "JetBrains Mnon NL" :size 26))
+
+;; Set font for chinese characters
+;; Font should be twice the width of asci chars so that org tables align
+;; This will break if run in terminal mode, so use conditional to only run for GUI.
+(if (display-graphic-p)
+    (dolist (charset '(kana han cjk-misc bopomofo))
+      (set-fontset-font (frame-parameter nil 'font)
+                        charset (font-spec :family "Hiragino Sans GB" :size 18))))
+
 
 (if IS-WINDOWS
     (set-selection-coding-system 'utf-16le-dos)
@@ -194,12 +206,12 @@
 
 (add-hook 'dired-mode-hook 'org-download-enable)
 
-;; (use-package! org-bullets
-;;   :hook
-;;   (org-mode . org-bullets-mode)
-;;   :config
-;;   ;; (setq org-bullets-bullet-list '("●" "◆" "○" ""))
-;;   )
+(use-package! org-bullets
+  :hook
+  (org-mode . org-bullets-mode)
+  :config
+  ;; (setq org-bullets-bullet-list '("●" "◆" "○" ""))
+  )
 (use-package! ess :defer t)
 
 (after! org
