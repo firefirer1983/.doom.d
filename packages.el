@@ -65,3 +65,4 @@
 (package! ctable)
 (package! eaf)
 (package! dired+)
+(package! org-jira)

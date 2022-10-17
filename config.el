@@ -106,6 +106,21 @@
 (add-hook! 'org-mode-hook #'subword-mode)
 
 (setq mixed-pitch-variable-pitch-cursor nil)
+(setq org-agenda-time-grid (quote ((daily today require-timed)
+                                   (900
+                                    1000
+                                    1200
+                                    1350
+                                    1800
+                                    2000)
+                                   "......"
+                                   "-----------------------------------------------------"
+                                   )))
+
+(setq org-agenda-files '("~/Documents/ikas/gtd.org") )
+
+(setq org-agenda-use-time-grid t)
+;;(setq org-agenda-timegrid-use-ampm t)
 
 (defun mode-name-to-lang-name (mode)
   (or (cadr (assoc mode
@@ -262,3 +277,7 @@
 (map! "C-s" #'swiper)
 
 (add-hook! 'prog-mode-hook #'subword-mode)
+(use-package! org-jira
+  :init
+  (setq jiralib-url "http://jira.oa.ikasinfo.com")
+  )
