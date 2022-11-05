@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: ppt
+# key: ppt
+# --
+#+OPTIONS: num:nil toc:nil
+#+Title: Title of Your Talk
+#+Author: 张旭毅
+#+Email: zhangxuyi@ikasinfo.com

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: jira
+# key: <jira
+# --
+[[http://jira.oa.ikasinfo.com/browse/XDMES-$1][XDMES-$1]]
+
+$0

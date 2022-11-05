@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: json
+# key: trigger-key
+# condition: t
+# --
+
+#+begin_src json
+{
+  "$1": $2,
+}
+$0
+#+end_src

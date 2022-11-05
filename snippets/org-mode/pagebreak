@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: pagebreak
+# key: trigger-key
+# condition: t
+# --
+{{{pagebreak}}}
+$0

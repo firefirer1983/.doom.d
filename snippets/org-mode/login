@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: login
+# key: <login
+# --
+
+#+begin_src http :wrap :select .data.token :var host=host username=username password=password :max-time 3
+POST $\{host\}/login
+Content-Type: application/json
+
+{
+  "username": "$\{username\}",
+  "password": "$\{password\}",
+  "source": "0",
+  "remember": true
+}
+#+end_src

@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: httpenv
+# key: <httpenv
+# --
+* 服务器信息
+  :PROPERTIES:
+  :ID:       197a8103-7353-46ae-8bb4-0b5370b0e2fd
+  :END:
+
+  本人测试服务URL
+  #+name: host
+  : http://127.0.0.1:8000/api/v1.0
+  #+name: username
+  : admin
+  #+name: password
+  : b9b0a6e0d41853e4174b150d2e79381d8afd8398b76b19e9145a0d5a2cea819d
+  #+name: my-auth
+  : eyJhbGciOiJIUzUxMiIsImlhdCI6MTYzNzM4OTk1NiwiZXhwIjoxNjM3MzkxNzU2fQ.eyJpZCI6MSwic291cmNlIjoiMCJ9.M1rA0FqLv7VP-hTE0QaUXo0PaEhUEFBltgOa_ie6jG5UUJPautjXsnsZ0rStEd3RMMMlRuccuWT1GIYqwO-aEA

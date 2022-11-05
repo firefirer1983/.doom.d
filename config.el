@@ -42,7 +42,7 @@
 (if (display-graphic-p)
     (dolist (charset '(kana han cjk-misc bopomofo))
       (set-fontset-font (frame-parameter nil 'font)
-                        charset (font-spec :family "Hiragino Sans GB" :size 18))))
+                        charset (font-spec :family "SourceHanSansCN-Normal" :size 18))))
 
 
 (if IS-WINDOWS
@@ -95,17 +95,18 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
 (setq plantuml-jar-path "D:/plantuml.jar")
-(setq plantuml-default-exec-mode 'jar)
+;; (setq plantuml-default-exec-mode 'jar)
+(setq plantuml-exec-mode 'plantuml)
 (setq plantuml-java-args (list "-Djava.awt.headless=true" "-jar"))
+(setq plantuml-jar-args (list "-charset UTF-8" "-config ~/.plantuml.cfg"))
+(setq org-plantuml-args (list "-headless" "-charset UTF-8" "-config ~/.plantuml.cfg"))
+(setq org-plantuml-exec-mode 'plantuml)
+(setq org-agenda-files "~/Documents/IKAS/gtd.org")
+
 
 (setq confirm-kill-emacs nil)
-
-(add-hook! 'org-mode-hook #'mixed-pitch-mode)
-(add-hook! 'org-mode-hook #'solaire-mode)
-(add-hook! 'org-mode-hook #'subword-mode)
-
-(setq mixed-pitch-variable-pitch-cursor nil)
 (setq org-agenda-time-grid (quote ((daily today require-timed)
                                    (900
                                     1000
@@ -118,7 +119,7 @@
                                    )))
 
 (setq org-agenda-files '("~/Documents/ikas/gtd.org") )
-
+(setq org-todo-keywords '((sequence "TODO(t)" "WAIT(w)" "|" "DONE(d)" "KILL(k)")))
 (setq org-agenda-use-time-grid t)
 ;;(setq org-agenda-timegrid-use-ampm t)
 
@@ -207,35 +208,19 @@
                      ("conf" "Configuration File"))))
       mode))
 
-(use-package! plantuml-mode)
-(use-package! pdf-tools)
-(use-package! all-the-icons)
 (use-package! expand-region
   :bind
   (("C-q" . 'er/expand-region)))
-(use-package! org-download)
-;; (use-package! mixed-pitch
-;;   :hook
-;;   ;; If you want it in all text modes:
-;;   (text-mode . mixed-pitch-mode))
-
-(add-hook 'dired-mode-hook 'org-download-enable)
-
-(use-package! org-bullets
-  :hook
-  (org-mode . org-bullets-mode)
-  :config
-  ;; (setq org-bullets-bullet-list '("●" "◆" "○" ""))
-  )
-(use-package! ess :defer t)
 
 (after! org
 
   (load-library "ox-reveal")
   (setq org-reveal-root "file:///g:/repo/reveal.js")
   (setq org-reveal-title-slide nil)
+  (setq org-startup-folded t)
   )
 
+(use-package! better-defaults)
 (use-package! dired+
   :init
   (setq diredp-w32-local-drives '(("C:" "Local Disk") ("D:" "Local Disk") ("E:" "Local Disk") ("//wsl$/Ubuntu-18.04/home/xy/" "WSL Disk")))
@@ -243,28 +228,23 @@
 
 (use-package! htmlize
   :defer t)
-;; (add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-application-framework/")
-(use-package! eww :defer t)
-(use-package! eaf
-  :load-path "~/.emacs.d/.local/straight/repos/eaf"
+
+(use-package! flycheck-plantuml)
+
+(use-package! org-jira
   :init
-  (setq eaf-proxy-type "socks5")
-  (setq eaf-proxy-host "127.0.0.1")
-  (setq eaf-proxy-port "1080")
-  :custom
-  (eaf-browser-continue-where-left-off t)
-  (eaf-browser-enable-adblocker t)
-  (browse-url-browser-function 'eaf-open-browser)
-
-  :config
-  (defalias 'browse-web #'eaf-open-browser)
-
-  (require 'eaf-browser)
-  (require 'eaf-markdown-previewer)
-  (require 'eaf-mindmap)
-  (require 'eaf-music-player)
-  (require 'eaf-terminal)
-  (require 'eaf-video-player)
+  (setq jiralib-url "http://jira.oa.ikasinfo.com")
+  (setq org-jira-custom-jqls
+  '(
+    (:jql " project = ZCMOCVD1
+AND resolution = Unresolved
+AND issuetype = Sub-task
+AND assignee in (zhang.feng, ye.jinfeng, qin.xinhui, wu.qiwen, xie.yuan, xu.jianguo, zhang.xuyi, gou.xiaojun, li.daohuan, huang.kai)
+AND labels in (RMS, FDC, EAP, APC)
+ORDER BY priority DESC, updated DESC "
+          :limit 10000
+          :filename "mtc")
+    ))
   )
 ;; Keybindings
 (map! "C-x C-r" #'counsel-recentf)
@@ -274,9 +254,19 @@
 (map! "C-x C-k" #'kill-this-buffer)
 (map! "C-j" #'join-line)
 (map! "M-n" #'yas/insert-snippet)
-(map! "C-s" #'swiper)
+(map! "C-s" #'swiper-isearch)
+(map! "M-y" #'counsel-yank-pop)
+(map! "C-r" nil)
+(map! "C-r s" #'counsel-ag)
+(map! "C-r g" #'counsel-rg)
+(map! "C-r g" #'counsel-rg)
+(map! "C-r r" #'ivy-resume)
+(map! "C-c h" #'help-command)
+(map! "M-1" #'counsel-projectile-find-file)
+
 
 (add-hook! 'prog-mode-hook #'subword-mode)
+(add-hook! 'org-mode-hook #'subword-mode)
 (use-package! org-jira
   :init
   (setq jiralib-url "http://jira.oa.ikasinfo.com")

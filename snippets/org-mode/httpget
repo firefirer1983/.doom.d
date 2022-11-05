@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: http
+# key: <http
+# --
+
+#+begin_src http :pretty :wrap src json :var token=my-auth host=local :max-time 3
+$0 $\{host\}/$1
+Authorization: $\{token\}
+#+end_src

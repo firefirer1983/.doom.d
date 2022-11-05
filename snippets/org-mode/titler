@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: titler
+# key: <t
+# --
+#+TITLE:  ${1:title}
+#+AUTHOR: 张旭毅
+#+OPTIONS: num:nil ^:nil \n:t toc:nil
+#+SETUPFILE: theme-readtheorg.setup
+#+MACRO: pagebreak @@latex:\newpage@@ @@html:<div style="page-break-before:always">&nbsp;</div>@@
+
+$0
