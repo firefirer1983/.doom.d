@@ -251,7 +251,7 @@ ORDER BY priority DESC, updated DESC "
 (map! "C-x C-b" #'counsel-buffer-or-recentf)
 (map! "C-x b" #'counsel-switch-buffer)
 (map! "C-x C-o" #'other-window)
-(map! "C-x C-k" #'kill-this-buffer)
+(map! "C-x k" #'kill-this-buffer)
 (map! "C-j" #'join-line)
 (map! "M-n" #'yas/insert-snippet)
 (map! "C-s" #'swiper-isearch)
