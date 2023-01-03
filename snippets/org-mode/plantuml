@@ -3,6 +3,6 @@
 # key: <uml
 # condition: t
 # --
-#+begin_src plantuml :cmdline -config "C:\Users\zhang.xuyi\.plantuml\plantuml_stylesheet.iuml" :file $1.png
+#+begin_src plantuml :cmdline -config "$USERPROFILE/.plantuml/plantuml/themes/puml-theme-mars.puml" :file $1.png
 $0
 #+end_src

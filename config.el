@@ -218,7 +218,10 @@
   (setq org-reveal-root "file:///g:/repo/reveal.js")
   (setq org-reveal-title-slide nil)
   (setq org-startup-folded t)
+  (setq org-babel-python-command "python")
   )
+
+
 
 (use-package! better-defaults)
 (use-package! dired+
@@ -236,14 +239,14 @@
   (setq jiralib-url "http://jira.oa.ikasinfo.com")
   (setq org-jira-custom-jqls
   '(
-    (:jql " project = ZCMOCVD1
+    (:jql "project = ZCMOCVD1
+AND status in ('To Do', 开启, 进行中, 重新开启)
 AND resolution = Unresolved
-AND issuetype = Sub-task
-AND assignee in (zhang.feng, ye.jinfeng, qin.xinhui, wu.qiwen, xie.yuan, xu.jianguo, zhang.xuyi, gou.xiaojun, li.daohuan, huang.kai)
-AND labels in (RMS, FDC, EAP, APC)
-ORDER BY priority DESC, updated DESC "
+AND issuetype not in (Story, Epic, Task)
+AND assignee in (zhang.feng, ye.jinfeng, qin.xinhui, wu.qiwen, xie.yuan, xu.jianguo, zhang.xuyi, gou.xiaojun, li.daohuan, huang.kai, xiao.zhifen, tang.jianghu, xie.yuan, wang.peizhang)
+AND affectedVersion in (1.0.0, 1.1.0) ORDER BY priority DESC, updated DESC"
           :limit 10000
-          :filename "mtc")
+          :filename "smtc")
     ))
   )
 ;; Keybindings
@@ -251,7 +254,7 @@ ORDER BY priority DESC, updated DESC "
 (map! "C-x C-b" #'counsel-buffer-or-recentf)
 (map! "C-x b" #'counsel-switch-buffer)
 (map! "C-x C-o" #'other-window)
-(map! "C-x C-k" #'kill-this-buffer)
+(map! "C-x k" #'kill-this-buffer)
 (map! "C-j" #'join-line)
 (map! "M-n" #'yas/insert-snippet)
 (map! "C-s" #'swiper-isearch)
@@ -263,7 +266,8 @@ ORDER BY priority DESC, updated DESC "
 (map! "C-r r" #'ivy-resume)
 (map! "C-c h" #'help-command)
 (map! "M-1" #'counsel-projectile-find-file)
-
+(map! "C-c =" #'text-scale-increase)
+(map! "C-c -" #'text-scale-decrease)
 
 (add-hook! 'prog-mode-hook #'subword-mode)
 (add-hook! 'org-mode-hook #'subword-mode)
@@ -271,3 +275,27 @@ ORDER BY priority DESC, updated DESC "
   :init
   (setq jiralib-url "http://jira.oa.ikasinfo.com")
   )
+(setq markdown-command "C:/Users/Administrator/AppData/Roaming/npm/marked")
+(setq markdown-open-command "C:/Users/Administrator/AppData/Roaming/npm/marked")
+(setenv "PATH" (concat (getenv "PATH") ":/Library/Tex/texbin"))
+(setq exec-path (append exec-path  '("/Library/Tex/texbin")))
+
+
+
+
+; The following configuration disables the confirmation prompt whenever code blocks are evaluated.
+
+(setq org-confirm-babel-evaluate nil)
+
+; The following hook make images to be shown after code blocks are executed.
+(setq org-preview-latex-default-process 'imagemagick)
+(add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
+
+(add-to-list 'org-latex-packages-alist
+             '("" "tikz" t)
+             '("" "pgfplots" t)
+             )
+
+(eval-after-load "preview"
+  '(add-to-list 'preview-default-preamble "\\PreviewEnvironment{tikzpicture}" t))
+; The following configuration allows code blocks whose language is latex to be evaluated

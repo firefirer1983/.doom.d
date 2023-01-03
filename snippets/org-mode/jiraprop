@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: jiraprop
+# key: <jiraprop
+# --
+
+:PROPERTIES:
+:ESTIMATED: $1
+:TYPE: $2
+:OWNER: $3
+:END:
+$0
