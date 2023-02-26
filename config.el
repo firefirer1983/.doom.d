@@ -219,9 +219,14 @@
   (setq org-reveal-title-slide nil)
   (setq org-startup-folded t)
   (setq org-babel-python-command "python")
+  (setq org-export-global-macros '(
+("pagebreak" . "@@latex:\newpage@@ @@html:<div style='page-break-before:always'>&nbsp;</div>@@")
+                                   ))
   )
 
 
+(use-package! ox-pandoc)
+(use-package! ox-gfm)
 
 (use-package! better-defaults)
 (use-package! dired+
@@ -249,6 +254,13 @@ AND affectedVersion in (1.0.0, 1.1.0) ORDER BY priority DESC, updated DESC"
           :filename "smtc")
     ))
   )
+
+(use-package! ob-mermaid
+  :after org
+  :init
+  (after! org
+    (add-to-list 'org-babel-load-languages '(mermaid . t))))
+
 ;; Keybindings
 (map! "C-x C-r" #'counsel-recentf)
 (map! "C-x C-b" #'counsel-buffer-or-recentf)
@@ -275,12 +287,11 @@ AND affectedVersion in (1.0.0, 1.1.0) ORDER BY priority DESC, updated DESC"
   :init
   (setq jiralib-url "http://jira.oa.ikasinfo.com")
   )
+
 (setq markdown-command "C:/Users/Administrator/AppData/Roaming/npm/marked")
 (setq markdown-open-command "C:/Users/Administrator/AppData/Roaming/npm/marked")
 (setenv "PATH" (concat (getenv "PATH") ":/Library/Tex/texbin"))
 (setq exec-path (append exec-path  '("/Library/Tex/texbin")))
-
-
 
 
 ; The following configuration disables the confirmation prompt whenever code blocks are evaluated.

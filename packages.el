@@ -57,3 +57,8 @@
 (package! org-jira)
 (package! better-defaults)
 (package! flycheck-plantuml)
+(package! ox-pandoc)
+(package! ox-gfm)
+(package! pandoc)
+(package! pandoc-mode)
+(package! ob-mermaid)
